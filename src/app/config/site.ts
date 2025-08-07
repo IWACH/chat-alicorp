@@ -1,6 +1,6 @@
-export type SiteConfig = typeof siteConfig;
+import { ISiteConfig } from "@/core/interfaces";
 
-export const siteConfig = {
+export const siteConfig: ISiteConfig = {
   name: "Chat Alicorp",
   description: "App que te permite chatear con Alicorp.",
 };

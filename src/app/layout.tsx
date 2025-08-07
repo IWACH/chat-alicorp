@@ -2,10 +2,17 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { siteConfig } from "./config/site";
+import { ThemeProvider } from "@/integrations/providers/ThemeProvider";
 
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
@@ -14,16 +21,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es">
+    <html lang="es" suppressHydrationWarning>
       <head />
       <body
         className={
           "min-h-dvh bg-background text-foreground font-sans antialiased"
         }
       >
-        <main className={"flex flex-1 justify-center w-full h-dvh"}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
-        </main>
+        </ThemeProvider>
       </body>
     </html>
   );

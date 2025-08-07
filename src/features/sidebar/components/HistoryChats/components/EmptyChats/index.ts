@@ -1,0 +1,1 @@
+export { default as EmptyChats } from "./EmptyChats";
