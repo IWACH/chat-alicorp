@@ -1,19 +1,38 @@
 "use client";
 
 import { ArrowUp, Paperclip } from "lucide-react";
-import { useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 
+import { useFocusInput } from "@/core/hooks/useFocusInput.hook";
 import { Button } from "@/ui/Button";
 
-const InputChat = () => {
-  const [inputValue, setInputValue] = useState("");
+interface Props {
+  onSend?: (text: string) => void;
+  disabled?: boolean;
+}
 
-  const isDisabled = !inputValue.trim();
+const InputChat = ({ onSend, disabled }: Props) => {
+  const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const { focusInput } = useFocusInput(inputRef, disabled);
+
+  const isDisabled = disabled || !inputValue.trim();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (isDisabled) return;
+    const value = inputValue.trim();
+    onSend?.(value);
+    setInputValue("");
+    focusInput();
+  };
 
   return (
-    <div className="p-4">
+    <form onSubmit={handleSubmit} className="p-4">
       <div className="relative flex items-center">
         <Button
+          type="button"
           variant="ghost"
           size="sm"
           className="absolute left-3 z-10 h-6 w-6 p-0 text-muted-foreground hover:text-foreground"
@@ -22,6 +41,7 @@ const InputChat = () => {
         </Button>
 
         <input
+          ref={inputRef}
           type="text"
           placeholder="Pregunta lo que quieras"
           value={inputValue}
@@ -30,6 +50,7 @@ const InputChat = () => {
         />
 
         <Button
+          type="submit"
           variant="default"
           size="sm"
           disabled={isDisabled}
@@ -42,7 +63,7 @@ const InputChat = () => {
           <ArrowUp className="h-4 w-4" />
         </Button>
       </div>
-    </div>
+    </form>
   );
 };
 
