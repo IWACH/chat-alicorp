@@ -1,5 +1,8 @@
 import { localStorageUtil } from "@/core/utils/localStorage.util";
-import { StoredConversation, StoredMessage } from "@/features/chat/models";
+import {
+  StoredConversation,
+  StoredMessage,
+} from "@/features/chat/models/interfaces/chat.interface";
 
 const CONVERSATIONS_KEY = "chat-conversations";
 const CURRENT_CHAT_KEY = "current-chat-id";

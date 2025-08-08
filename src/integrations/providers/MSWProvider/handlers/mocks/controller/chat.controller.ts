@@ -1,16 +1,20 @@
 import {
-  getCurrentConversation,
-  getAllConversations,
-  setCurrentChatId,
-  findConversationById,
-  createConversation,
-  saveConversation,
-  createMessage,
+  ChatMessage,
+  StoredConversation,
+  StoredMessage,
+} from "@/features/chat/models/interfaces/chat.interface";
+import {
   addMessageToConversation,
+  createConversation,
+  createMessage,
+  findConversationById,
+  getAllConversations,
   getCurrentChatId,
+  getCurrentConversation,
   saveAllConversations,
+  saveConversation,
+  setCurrentChatId,
 } from "@/integrations/providers/MSWProvider/handlers/mocks/database/chat.db";
-import { ChatMessage, StoredMessage, StoredConversation } from "@/features/chat/models";
 
 export const mapStoredMessageToUI = (
   storedMessage: StoredMessage,
@@ -36,7 +40,10 @@ export const getHistoryChats = () => {
   const conversations = getAllConversations();
 
   const historyData = conversations
-    .sort((a: StoredConversation, b: StoredConversation) => b.updatedAt - a.updatedAt)
+    .sort(
+      (a: StoredConversation, b: StoredConversation) =>
+        b.updatedAt - a.updatedAt
+    )
     .map((conversation: StoredConversation) => ({
       id: conversation.id,
       title: conversation.title,
@@ -70,7 +77,9 @@ export const startNewConversation = (): ChatMessage[] => {
 export const deleteConversation = (chatId: string): boolean => {
   try {
     const conversations = getAllConversations();
-    const filteredConversations = conversations.filter((c: StoredConversation) => c.id !== chatId);
+    const filteredConversations = conversations.filter(
+      (c: StoredConversation) => c.id !== chatId
+    );
 
     const currentChatId = getCurrentChatId();
     if (currentChatId === chatId) {

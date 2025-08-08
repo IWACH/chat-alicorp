@@ -1,11 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { ChatMessage, ChatMessageRole } from "@/features/chat/models";
-import { sendMessageService, getChatMessagesByIdService, startNewChatService, deleteConversationService } from "@/features/chat/services/client/chat.service";
+import {
+  deleteConversationService,
+  getChatMessagesByIdService,
+  sendMessageService,
+  startNewChatService,
+} from "@/features/chat/services/client/chat.service";
+import {
+  getCurrentChatId,
+  setCurrentChatId,
+} from "@/integrations/providers/MSWProvider/handlers/mocks/database/chat.db";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getCurrentChatId, setCurrentChatId } from "@/integrations/providers/MSWProvider/handlers/mocks/database/chat.db";
+
+import {
+  ChatMessage,
+  ChatMessageRole,
+} from "../models/interfaces/chat.interface";
 
 export type { ChatMessage, ChatMessageRole };
 
@@ -97,7 +109,10 @@ export function useChat() {
     startNewChat,
     deleteChat,
     data: messages,
-    isPending: isPending || getChatMessagesByIdMutation.isPending || startNewChatMutation.isPending,
+    isPending:
+      isPending ||
+      getChatMessagesByIdMutation.isPending ||
+      startNewChatMutation.isPending,
     isError,
     isSuccess,
     isGettingChatMessages: getChatMessagesByIdMutation.isPending,

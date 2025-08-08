@@ -1,7 +1,8 @@
 import { FC } from "react";
 
 import { cn } from "@/core/utils/cn.util";
-import { ChatMessage } from "@/features/chat/models";
+
+import { ChatMessage } from "../../models/interfaces/chat.interface";
 
 interface Props {
   message: ChatMessage;
