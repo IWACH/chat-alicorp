@@ -1,4 +1,4 @@
-import { ISiteConfig } from "@/core/interfaces";
+import { ISiteConfig } from "@/core/interfaces/siteConfig.interface";
 
 export const siteConfig: ISiteConfig = {
   name: "Chat Alicorp",

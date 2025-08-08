@@ -21,7 +21,7 @@ function MSWProvider({ children }: PropsWithChildren) {
     hasStartedRef.current = true;
 
     worker
-      .start({ onUnhandledRequest: "bypass" })
+      .start({ onUnhandledRequest: "bypass", quiet: true })
       .then(() => setIsReady(true))
       .catch(() => setIsReady(true));
   }, []);

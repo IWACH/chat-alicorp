@@ -1,39 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useServiceHistoryChats } from "@/features/sidebar/hooks/useServiceHistoryChats";
 
 import { EmptyChats } from "./components/EmptyChats";
 
-interface HistoryChatItem {
-  id: string;
-  title: string;
-  lastMessageAt: string;
-}
-
 const HistoryChats = () => {
-  const [chats, setChats] = useState<HistoryChatItem[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    let isMounted = true;
-    fetch("/api/history-chats")
-      .then((res) => res.json())
-      .then((data) => {
-        if (!isMounted) return;
-        setChats(data?.data ?? []);
-      })
-      .catch(() => {
-        if (!isMounted) return;
-        setChats([]);
-      })
-      .finally(() => {
-        if (!isMounted) return;
-        setIsLoading(false);
-      });
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  const { data: chats = [], isLoading, isError } = useServiceHistoryChats();
 
   if (isLoading) {
     return (
@@ -43,7 +15,7 @@ const HistoryChats = () => {
     );
   }
 
-  if (!chats.length) return <EmptyChats />;
+  if (isError || !chats.length) return <EmptyChats />;
 
   return (
     <div className="flex-1 overflow-auto p-2 space-y-1">
