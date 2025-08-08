@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { siteConfig } from "./config/site";
+import { MSWProvider } from "@/integrations/providers/MSWProvider";
 import { ThemeProvider } from "@/integrations/providers/ThemeProvider";
+
+import { siteConfig } from "./config/site";
 
 export const metadata: Metadata = {
   title: siteConfig.name,
@@ -34,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <MSWProvider>{children}</MSWProvider>
         </ThemeProvider>
       </body>
     </html>
