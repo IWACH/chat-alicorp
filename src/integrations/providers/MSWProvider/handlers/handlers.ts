@@ -3,6 +3,7 @@ import { http, HttpResponse } from "msw";
 import {
   clearCurrentConversation,
   deleteConversation,
+  generateBotResponse,
   getCurrentMessages,
   getHistoryChats,
   loadChatById,
@@ -128,14 +129,7 @@ export const handlers = [
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      const samples = [
-        "Gracias por tu mensaje, déjame verificar esa información.",
-        "Interesante pregunta. Te comento: ...",
-        "Claro, aquí tienes un resumen inicial.",
-        "Perfecto, empecemos por lo básico.",
-        "Entendido. Puedo ayudarte con eso.",
-      ];
-      const botReply = samples[Math.floor(Math.random() * samples.length)];
+      const botReply = generateBotResponse(userMessage);
 
       const allMessages = await processMessage(userMessage, botReply);
 

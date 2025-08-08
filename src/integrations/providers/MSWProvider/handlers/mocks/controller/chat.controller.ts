@@ -123,6 +123,42 @@ export const processMessage = async (
   );
 };
 
+const keywordResponses: Record<string, string> = {
+  misión:
+    "Transformamos mercados a través de nuestras marcas líderes, generando experiencias extraordinarias en nuestros consumidores. Buscamos innovar constantemente para generar valor y bienestar en la sociedad.",
+  visión:
+    "Ser líderes en los mercados donde competimos, reconocidos por innovación, excelencia en gestión y contribución al desarrollo sostenible.",
+  organigrama:
+    "**Gerente General:** Álvaro Correa Malachowski\n\n**Vicepresidentes:**\n• Finanzas y Transformación: Luis Banchero Picasso\n• Marketing CMP & CoE Marketing de CM: Álvaro Rojas Miró Quesada\n• Bolivia y Negocios Internacionales: Javier Rota Baguer\n• Alicorp Soluciones (B2B) y Materias Primas: Luis Estrada Rondón\n• Supply Chain: Vinicius Guimarães Barbosa\n• Asuntos Corporativos: Magdalena Morales Valentín\n• Recursos Humanos & Chief of Staff: Paola Ruchman Lazo\n• Comercial CMP & CoE Comercial de CM: Aldo Hidalgo Mouchard\n\n**Vitapro:**\n• Gerente General: Fabricio Vargas Elías",
+};
+
+const normalizeText = (text: string): string => {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+};
+
+export const generateBotResponse = (userMessage: string): string => {
+  const normalizedMessage = normalizeText(userMessage);
+
+  for (const [keyword, response] of Object.entries(keywordResponses)) {
+    const normalizedKeyword = normalizeText(keyword);
+    if (normalizedMessage.includes(normalizedKeyword)) {
+      return response;
+    }
+  }
+
+  const defaultResponses = [
+    "Gracias por tu consulta. ¿Podrías especificar más sobre qué información de Alicorp necesitas?",
+    "Estoy aquí para ayudarte con información sobre Alicorp. ¿Te puedo ayudar con nuestra misión, visión u organigrama?",
+    "¿En qué puedo asistirte hoy? Puedo compartir información sobre la estructura organizacional, misión y visión de Alicorp.",
+    "Cuéntame más sobre lo que necesitas saber de Alicorp y te ayudo con la información correspondiente.",
+  ];
+
+  return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+};
+
 export const clearCurrentConversation = (): ChatMessage[] => {
   const currentConversation = getCurrentConversation();
   if (!currentConversation) return [];
