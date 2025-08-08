@@ -1,4 +1,6 @@
+import { Metadata, Viewport } from "next";
+
 export interface ISiteConfig {
-  name: string;
-  description: string;
+  metadata: Metadata;
+  viewport: Viewport;
 }

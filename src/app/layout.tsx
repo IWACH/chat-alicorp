@@ -1,23 +1,13 @@
-import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import "@/core/styles/globals.css";
 
+import { siteConfig } from "@/app/config/site.config";
 import { MSWProvider } from "@/integrations/providers/MSWProvider";
 import { ReactQueryProvider } from "@/integrations/providers/ReactQueryProvider";
 import { ThemeProvider } from "@/integrations/providers/ThemeProvider";
 
-import { siteConfig } from "./config/site";
+export const metadata = siteConfig.metadata;
 
-export const metadata: Metadata = {
-  title: siteConfig.name,
-  description: siteConfig.description,
-};
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-};
+export const viewport = siteConfig.viewport;
 
 export default function RootLayout({
   children,
