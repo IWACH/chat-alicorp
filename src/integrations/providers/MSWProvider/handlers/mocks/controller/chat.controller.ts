@@ -125,11 +125,11 @@ export const processMessage = async (
 
 const keywordResponses: Record<string, string> = {
   misión:
-    "Transformamos mercados a través de nuestras marcas líderes, generando experiencias extraordinarias en nuestros consumidores. Buscamos innovar constantemente para generar valor y bienestar en la sociedad.",
+    "La misión de Alicorp es Transformamos mercados a través de nuestras marcas líderes, generando experiencias extraordinarias en nuestros consumidores. Buscamos innovar constantemente para generar valor y bienestar en la sociedad.",
   visión:
-    "Ser líderes en los mercados donde competimos, reconocidos por innovación, excelencia en gestión y contribución al desarrollo sostenible.",
+    "La visión de Alicorp es Ser líderes en los mercados donde competimos, reconocidos por innovación, excelencia en gestión y contribución al desarrollo sostenible.",
   organigrama:
-    "**Gerente General:** Álvaro Correa Malachowski\n\n**Vicepresidentes:**\n• Finanzas y Transformación: Luis Banchero Picasso\n• Marketing CMP & CoE Marketing de CM: Álvaro Rojas Miró Quesada\n• Bolivia y Negocios Internacionales: Javier Rota Baguer\n• Alicorp Soluciones (B2B) y Materias Primas: Luis Estrada Rondón\n• Supply Chain: Vinicius Guimarães Barbosa\n• Asuntos Corporativos: Magdalena Morales Valentín\n• Recursos Humanos & Chief of Staff: Paola Ruchman Lazo\n• Comercial CMP & CoE Comercial de CM: Aldo Hidalgo Mouchard\n\n**Vitapro:**\n• Gerente General: Fabricio Vargas Elías",
+    "El organigrama de Alicorp es **Gerente General:** Álvaro Correa Malachowski\n\n**Vicepresidentes:**\n• Finanzas y Transformación: Luis Banchero Picasso\n• Marketing CMP & CoE Marketing de CM: Álvaro Rojas Miró Quesada\n• Bolivia y Negocios Internacionales: Javier Rota Baguer\n• Alicorp Soluciones (B2B) y Materias Primas: Luis Estrada Rondón\n• Supply Chain: Vinicius Guimarães Barbosa\n• Asuntos Corporativos: Magdalena Morales Valentín\n• Recursos Humanos & Chief of Staff: Paola Ruchman Lazo\n• Comercial CMP & CoE Comercial de CM: Aldo Hidalgo Mouchard\n\n**Vitapro:**\n• Gerente General: Fabricio Vargas Elías",
 };
 
 const normalizeText = (text: string): string => {

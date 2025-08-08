@@ -4,6 +4,7 @@ import { ArrowUp, Paperclip } from "lucide-react";
 import { FormEvent, useRef, useState } from "react";
 
 import { useFocusInput } from "@/core/hooks/useFocusInput.hook";
+import { isMobileDevice } from "@/core/utils/isMobile.util";
 import { Button } from "@/ui/Button";
 
 interface Props {
@@ -23,9 +24,17 @@ const InputChat = ({ onSend, disabled }: Props) => {
     e.preventDefault();
     if (isDisabled) return;
     const value = inputValue.trim();
+
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+
     onSend?.(value);
     setInputValue("");
-    focusInput();
+
+    if (!isMobileDevice()) {
+      focusInput();
+    }
   };
 
   return (
